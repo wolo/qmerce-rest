@@ -1,0 +1,29 @@
+{
+  "name": "qmerce-rest",
+  "version": "0.1.0",
+  "description": "Qmerce REST API layer",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolo/qmerce-rest.git"
+  },
+  "keywords": [
+    "qmerce"
+  ],
+  "author": "Wolfgang Loch <wolo@wolosoft.com> (http://www.wolosoft.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wolo/qmerce-rest/issues"
+  },
+  "homepage": "https://github.com/wolo/qmerce-rest#readme",
+  "dependencies": {
+    "request": "^2.71.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
