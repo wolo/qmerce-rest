@@ -2,7 +2,7 @@
   "name": "qmerce-rest",
   "version": "0.1.0",
   "description": "Qmerce REST API layer",
-  "main": "index.js",
+  "main": "rest.js",
   "scripts": {
     "test": "mocha --reporter spec test/index.js"
   },
