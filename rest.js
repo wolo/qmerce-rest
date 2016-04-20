@@ -1,11 +1,13 @@
 const request = require('request');
 
-module.exports = function (baseUrl, auth) {
+module.exports = function (baseUrl, auth, options) {
 	
 	// private
 	const _request = (method, relativeUrl, data, callback) => {
 		const url = baseUrl + relativeUrl;
-		console.log(method + " " + url);
+		if(options && options.trace)
+			console.log(method + " " + url);
+
 		request({
 			method: method,
 			url: url, 
@@ -27,10 +29,15 @@ module.exports = function (baseUrl, auth) {
 					callback(null);
 				}
 				else {
-					console.log(response.statusCode + " " + response.statusMessage, data);
-					callback(new Error(method + " " + url + " failed: "
+					if(options && options.trace)
+						console.log(response.statusCode + " " + response.statusMessage, data);
+					
+					const err  = new Error(method + " " + url + " failed: "
 						+ response.statusCode + " " + response.statusMessage
-						+ " : " + JSON.stringify(data, null, 2)));
+						+ " : " + JSON.stringify(data, null, 2));
+					err.response = response;
+					err.data = data;
+					callback(err);
 				}
 	  		}
 		});
@@ -39,7 +46,6 @@ module.exports = function (baseUrl, auth) {
 	const _requestAsync = (method, relativeUrl, data) => {
 	    return new Promise(function(resolve, reject){
 	         _request(method, relativeUrl, data, function(error, data){
-//	             if(error !== null)
 	             if(error)
 	             	return reject(error);
 	             
